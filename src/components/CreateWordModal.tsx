@@ -13,14 +13,17 @@ interface dict {
 const CreateWordModal: React.FC<ModalProps> = (props) => {
     const [word, setWord] = useState("");
     const [result, setResult] = useState("");
-    const [nowLoading, setNowLoading] = useState(true);
+    const [nowLoading, setNowLoading] = useState(false);
     const api_url = "https://waapi-y5tash35xa-an.a.run.app/abbreviation"
     function submitWord(submit_text:string) {
         console.log(word);
+        setNowLoading(true);
         Axios.post(api_url,{
             post_text:{submit_text},
         })
-        .then((response) => setResult(response.data.result))
+        .then((response) => {setResult(response.data.result);
+                             setNowLoading(false);
+                            })
         //非同期に終わるから、ゲットした後はsaveしなきゃいけない？
         // 結果が返ってきて、そのあと、結果を表示する。
         // 結果を保存するのかしないのかを選択させた後、モーダルを閉じる。
