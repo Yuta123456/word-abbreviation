@@ -1,24 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { IonButton, IonCard, IonCheckbox, IonContent, IonHeader, IonItem, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonCheckbox, IonContent, IonHeader, IonItem, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import CreateWordButton from '../components/CreateWordButton';
 import CreateWordModal from '../components/CreateWordModal';
+import DeleteWordButton from '../components/DeleteWordButton';
+import DeleteAlert from '../components/DeleteAlert';
 
 const WordList: React.FC = () => {
   const [wordList, setWordList] = useState(JSON.parse(localStorage.getItem("wordList") || '{}'));
   const [showModal, setShowModal] = useState(false);
-  const [deleteMode, setDeleteMode] = useState(false);
-  const deleteList = new Set<string>();
+  const [showAlert, setShowAlert] = useState(false);
+  const [deleteList, setDeleteList] = useState(new Set<string>());
   useEffect(() => {
     setWordList(JSON.parse(localStorage.getItem("wordList") || '{}'))
   }, [showModal])
 
   function deleteWord() {
+    console.log("delete word list", deleteList);
     const newWordList = Object.assign({}, wordList);
-    deleteList.forEach((value:string) => {
+    deleteList.forEach((value: string) => {
       delete newWordList[value];
     })
     setWordList(newWordList);
-    console.log(newWordList);
+    console.log("run delete word")
     localStorage.setItem("wordList", JSON.stringify(newWordList));
   }
   return (
@@ -26,7 +29,7 @@ const WordList: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonTitle>WordList</IonTitle>
-          <IonButton onClick={()=>deleteWord()}>delete</IonButton>
+
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
@@ -42,10 +45,9 @@ const WordList: React.FC = () => {
                 () => {
                   if (deleteList.has(key)) {
                     deleteList.delete(key);
-                  }else{
+                  } else {
                     deleteList.add(key);
                   }
-                  console.log(deleteList);
                 }
               }></IonCheckbox>
               <div>{key}</div>
@@ -54,8 +56,10 @@ const WordList: React.FC = () => {
           );
         }
         )}
+        <DeleteAlert showAlert={showAlert} setShowAlert={setShowAlert} deleteWord={deleteWord} setDeleteList={setDeleteList}/>
         <CreateWordModal isOpen={showModal} setShowModal={setShowModal} />
         <CreateWordButton setShowModal={setShowModal} />
+        <DeleteWordButton setShowAlert={setShowAlert}/>
       </IonContent>
     </IonPage>
   );
