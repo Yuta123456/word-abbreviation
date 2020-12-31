@@ -10,6 +10,7 @@ const CreateWordModal: React.FC<ModalProps> = (props) => {
     const [word, setWord] = useState("");
     const [result, setResult] = useState("");
     const [nowLoading, setNowLoading] = useState(false);
+    
     function sleep(msec: number) { return new Promise(resolve => setTimeout(resolve, msec)) };
     const api_url = "https://waapi-y5tash35xa-an.a.run.app/abbreviation"
     function submitWord(submit_text: string) {
