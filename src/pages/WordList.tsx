@@ -50,8 +50,10 @@ const WordList: React.FC = () => {
                   }
                 }
               }></IonCheckbox>
-              <div>{key}</div>
-              <div>{wordList[key]}</div>
+              {// TODO: 右寄せ左寄せが効かない。
+              } 
+              <div className="ion-text-left">{key}</div>
+              <div className="ion-text-right">{wordList[key]}</div>
             </IonItem>
           );
         }
