@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
+import React, { useEffect, useState } from 'react';
+import { IonCard, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import CreateWordButton from '../components/CreateWordButton';
 import CreateWordModal from '../components/CreateWordModal';
 
 const WordList: React.FC = () => {
-  const [wordList, setWordList] = useState(localStorage.getItem("wordList"));
+  const [wordList, setWordList] = useState(JSON.parse(localStorage.getItem("wordList") || '{}'));
   const [showModal, setShowModal] = useState(false);
+  useEffect(() => {
+    setWordList(JSON.parse(localStorage.getItem("wordList") || '{}'))
+  }, [showModal])
   return (
     <IonPage>
       <IonHeader>
@@ -20,8 +22,17 @@ const WordList: React.FC = () => {
             <IonTitle size="large">WordList</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <CreateWordModal isOpen={showModal} setShowModal={setShowModal}/>
-        <CreateWordButton setShowModal={setShowModal}/>
+        {Object.keys(wordList).map((key) => {
+          return (
+            <IonCard key={key}>
+              <div>{key}</div>
+              <div>{wordList[key]}</div>
+            </IonCard>
+          );
+        }
+        )}
+        <CreateWordModal isOpen={showModal} setShowModal={setShowModal} />
+        <CreateWordButton setShowModal={setShowModal} />
       </IonContent>
     </IonPage>
   );

@@ -1,17 +1,21 @@
-import React, { useState } from 'react';
-import { IonContent, IonFab, IonFabButton, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import React from 'react';
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
 const LoadingComponent: React.FC = (props) => {
 
   return (
-    <Loader
-        type="Puff"
+    <div style={{ textAlign: "center" }}>
+      <div>Loading...</div>
+      <Loader
+        type="TailSpin"
         color="#00BFFF"
         height={100}
         width={100}
         timeout={3000} //3 secs
+
       />
+    </div>
+
   );
 };
 
