@@ -25,13 +25,16 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import CreateWordModal from './components/CreateWordModal';
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
         <IonRouterOutlet>
           <Route path="/word-list" component={WordList} />
-          <Route path="/" render={() => <Redirect to="/word-list" />} exact={true} />
+          <Route path="create" component={CreateWordModal} />
+          <Route path="/" render={() => <Redirect to="/word-list"/>} exact={true} />
+
         </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>

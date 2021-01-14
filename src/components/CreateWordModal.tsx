@@ -10,7 +10,7 @@ const CreateWordModal: React.FC<ModalProps> = (props) => {
     const [word, setWord] = useState("");
     const [result, setResult] = useState("");
     const [nowLoading, setNowLoading] = useState(false);
-    
+
     function sleep(msec: number) { return new Promise(resolve => setTimeout(resolve, msec)) };
     const api_url = "https://waapi-y5tash35xa-an.a.run.app/abbreviation"
     function submitWord(submit_text: string) {
@@ -34,7 +34,6 @@ const CreateWordModal: React.FC<ModalProps> = (props) => {
         }
         let wordList: WList;
         if ("wordList" in localStorage) {
-            //ここ適当にポチポチしたら治ったけどやばい気がする。
             wordList = JSON.parse(localStorage.getItem("wordList") || '{}');
         } else {
             wordList = {}
@@ -48,11 +47,11 @@ const CreateWordModal: React.FC<ModalProps> = (props) => {
         <IonModal isOpen={props.isOpen} onDidDismiss={() => props.setShowModal(false)}>
             <IonHeader>
                 <IonToolbar>
-                    <IonTitle>CreateWord</IonTitle>
+                    <IonTitle>略す言葉の入力</IonTitle>
                     <IonButton
                         onClick={() => props.setShowModal(false)}
                         slot="end"
-                    >close
+                    >閉じる
                     </IonButton>
                 </IonToolbar>
             </IonHeader>
@@ -60,11 +59,11 @@ const CreateWordModal: React.FC<ModalProps> = (props) => {
             {nowLoading ? <LoadingComponent /> : <div style={{ textAlign: "center" }}>{result}</div>}
             {result ?
                 <section style={{ textAlign: "center" }}>
-                    <IonButton color="success" onClick={() => saveWord(word, result)}>save</IonButton>
-                    <IonButton onClick={() => { init(); props.setShowModal(false) }} color="danger">discord</IonButton>
-                    <IonButton onClick={() => init()}>retry</IonButton>
+                    <IonButton color="success" onClick={() => saveWord(word, result)}>保存する</IonButton>
+                    <IonButton onClick={() => { init(); props.setShowModal(false) }} color="danger">保存しない</IonButton>
+                    <IonButton onClick={() => init()}>もう一度</IonButton>
                 </section>
-                : <IonButton onClick={() => submitWord(word)}>submit</IonButton>
+                : <IonButton onClick={() => submitWord(word)}>Let's 略！</IonButton>
             }
         </IonModal>
     );

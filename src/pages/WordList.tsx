@@ -11,6 +11,7 @@ const WordList: React.FC = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [deleteList, setDeleteList] = useState(new Set<string>());
   const [showFarewellToast, setShowFarewellToast] = useState(false);
+  const [showAbout, setShowAbout] = useState(false);
   useEffect(() => {
     setWordList(JSON.parse(localStorage.getItem("wordList") || '{}'))
   }, [showModal])
@@ -55,23 +56,23 @@ const WordList: React.FC = () => {
                 }
               }></IonCheckbox>
               {// TODO: 右寄せ左寄せが効かない。
-              } 
+              }
               <div className="ion-text-left">{key}</div>
               <div className="ion-text-right">{wordList[key]}</div>
             </IonItem>
           );
         }
         )}
-        <DeleteAlert  showAlert={showAlert} 
-                      setShowAlert={setShowAlert} 
-                      deleteWord={deleteWord} 
-                      setDeleteList={setDeleteList} 
-                      setShowFarewellToast={setShowFarewellToast}
+        <DeleteAlert showAlert={showAlert}
+          setShowAlert={setShowAlert}
+          deleteWord={deleteWord}
+          setDeleteList={setDeleteList}
+          setShowFarewellToast={setShowFarewellToast}
         />
         <CreateWordModal isOpen={showModal} setShowModal={setShowModal} />
         <CreateWordButton setShowModal={setShowModal} />
-        <DeleteWordButton setShowAlert={setShowAlert} disabled={deleteList.size === 0}/>
-        <FarewellToast setShowFarewellToast={setShowFarewellToast} showFarewellToast={showFarewellToast}/>
+        <DeleteWordButton setShowAlert={setShowAlert} disabled={deleteList.size === 0} />
+        <FarewellToast setShowFarewellToast={setShowFarewellToast} showFarewellToast={showFarewellToast} />
       </IonContent>
     </IonPage>
   );
