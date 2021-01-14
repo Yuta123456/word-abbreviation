@@ -4,6 +4,7 @@ type AlertProps = { setShowAlert: (newState:boolean) => void
                     showAlert:boolean
                     deleteWord: () => void
                     setDeleteList: (newList:Set<string>) => void
+                    setShowFarewellToast :(newState:boolean) => void
 }
 const DeleteAlert: React.FC<AlertProps> = (props) => {
   return (
@@ -11,8 +12,8 @@ const DeleteAlert: React.FC<AlertProps> = (props) => {
           isOpen={props.showAlert}
           onDidDismiss={() => props.setShowAlert(false)}
           //cssClass='my-custom-class'
-          header={'Confirm'}
-          message={'Could I delete word you selected ?'}
+          header={'確認'}
+          message={'選択した言葉たちを削除してもよろしいですか？'}
           buttons={[
             {
               text: 'Cancel',
@@ -26,6 +27,7 @@ const DeleteAlert: React.FC<AlertProps> = (props) => {
               text: 'OK',
               handler: () => {
                 props.deleteWord();
+                props.setShowFarewellToast(true);
                 props.setDeleteList(new Set<string>());
               }
             }

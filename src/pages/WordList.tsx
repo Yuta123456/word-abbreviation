@@ -4,12 +4,13 @@ import CreateWordButton from '../components/CreateWordButton';
 import CreateWordModal from '../components/CreateWordModal';
 import DeleteWordButton from '../components/DeleteWordButton';
 import DeleteAlert from '../components/DeleteAlert';
-
+import FarewellToast from '../components/FarewellToast'
 const WordList: React.FC = () => {
   const [wordList, setWordList] = useState(JSON.parse(localStorage.getItem("wordList") || '{}'));
   const [showModal, setShowModal] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
   const [deleteList, setDeleteList] = useState(new Set<string>());
+  const [showFarewellToast, setShowFarewellToast] = useState(false);
   useEffect(() => {
     setWordList(JSON.parse(localStorage.getItem("wordList") || '{}'))
   }, [showModal])
@@ -28,8 +29,7 @@ const WordList: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>WordList</IonTitle>
-
+          <IonTitle>略し言葉一覧</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
@@ -44,9 +44,13 @@ const WordList: React.FC = () => {
               <IonCheckbox onIonChange={
                 () => {
                   if (deleteList.has(key)) {
-                    deleteList.delete(key);
+                    const newDeleteList = new Set(deleteList);
+                    newDeleteList.delete(key)
+                    setDeleteList(newDeleteList);
                   } else {
-                    deleteList.add(key);
+                    const newDeleteList = new Set(deleteList);
+                    newDeleteList.add(key)
+                    setDeleteList(newDeleteList);
                   }
                 }
               }></IonCheckbox>
@@ -58,10 +62,16 @@ const WordList: React.FC = () => {
           );
         }
         )}
-        <DeleteAlert showAlert={showAlert} setShowAlert={setShowAlert} deleteWord={deleteWord} setDeleteList={setDeleteList}/>
+        <DeleteAlert  showAlert={showAlert} 
+                      setShowAlert={setShowAlert} 
+                      deleteWord={deleteWord} 
+                      setDeleteList={setDeleteList} 
+                      setShowFarewellToast={setShowFarewellToast}
+        />
         <CreateWordModal isOpen={showModal} setShowModal={setShowModal} />
         <CreateWordButton setShowModal={setShowModal} />
-        <DeleteWordButton setShowAlert={setShowAlert}/>
+        <DeleteWordButton setShowAlert={setShowAlert} disabled={deleteList.size === 0}/>
+        <FarewellToast setShowFarewellToast={setShowFarewellToast} showFarewellToast={showFarewellToast}/>
       </IonContent>
     </IonPage>
   );
