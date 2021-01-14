@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import { IonButton, IonHeader, IonInput, IonModal, IonTitle, IonToolbar } from '@ionic/react';
+import { IonBackButton, IonButton, IonButtons, IonContent, IonHeader, IonInput, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import Axios from 'axios';
 import LoadingComponent from './LoadingComponent';
-type ModalProps = {
-    isOpen: boolean
-    setShowModal: (newState: boolean) => void
+import { useHistory } from 'react-router-dom';
+type CreateWordPageProps = {
+    history: History
 }
-const CreateWordModal: React.FC<ModalProps> = (props) => {
+
+const CreateWordModal: React.FC<CreateWordPageProps> = () => {
     const [word, setWord] = useState("");
     const [result, setResult] = useState("");
     const [nowLoading, setNowLoading] = useState(false);
-
+    let history = useHistory();
     function sleep(msec: number) { return new Promise(resolve => setTimeout(resolve, msec)) };
     const api_url = "https://waapi-y5tash35xa-an.a.run.app/abbreviation"
     function submitWord(submit_text: string) {
@@ -41,31 +42,31 @@ const CreateWordModal: React.FC<ModalProps> = (props) => {
         wordList[word] = result;
         localStorage.setItem("wordList", JSON.stringify(wordList));
         init();
-        props.setShowModal(false);
+        history.push("./word-list")
     }
     return (
-        <IonModal isOpen={props.isOpen} onDidDismiss={() => props.setShowModal(false)}>
+        <IonPage>
             <IonHeader>
                 <IonToolbar>
-                    <IonTitle>略す言葉の入力</IonTitle>
-                    <IonButton
-                        onClick={() => props.setShowModal(false)}
-                        slot="end"
-                    >閉じる
-                    </IonButton>
+                    <IonTitle>略語を作成する</IonTitle>
+                    <IonButtons>
+                        <IonBackButton defaultHref="/" />
+                    </IonButtons>
                 </IonToolbar>
             </IonHeader>
-            <IonInput value={word} placeholder="Enter Input" onIonChange={e => setWord(e.detail.value!)} className="ion-text-center ion-padding" clearInput></IonInput>
-            {nowLoading ? <LoadingComponent /> : <div style={{ textAlign: "center" }}>{result}</div>}
-            {result ?
-                <section style={{ textAlign: "center" }}>
-                    <IonButton color="success" onClick={() => saveWord(word, result)}>保存する</IonButton>
-                    <IonButton onClick={() => { init(); props.setShowModal(false) }} color="danger">保存しない</IonButton>
-                    <IonButton onClick={() => init()}>もう一度</IonButton>
-                </section>
-                : <IonButton onClick={() => submitWord(word)}>Let's 略！</IonButton>
-            }
-        </IonModal>
+            <IonContent>
+                <IonInput value={word} placeholder="Enter Input" onIonChange={e => setWord(e.detail.value!)} className="ion-text-center ion-padding" clearInput></IonInput>
+                {nowLoading ? <LoadingComponent /> : <div style={{ textAlign: "center" }}>{result}</div>}
+                {result ?
+                    <section style={{ textAlign: "center" }}>
+                        <IonButton color="success" onClick={() => saveWord(word, result)}>保存する</IonButton>
+                        <IonButton onClick={() => { init(); history.goBack() }} color="danger">保存しない</IonButton>
+                        <IonButton onClick={() => init()}>もう一度</IonButton>
+                    </section>
+                    : <IonButton onClick={() => submitWord(word)}>これでOK</IonButton>
+                }
+            </IonContent>
+        </IonPage>
     );
 };
 

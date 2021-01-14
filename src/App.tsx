@@ -6,7 +6,6 @@ import {
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import WordList from './pages/WordList';
-
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 
@@ -25,16 +24,17 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import CreateWordModal from './components/CreateWordModal';
+import CreateWordModal from './components/CreateWord';
+import About from './components/About';
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
         <IonRouterOutlet>
           <Route path="/word-list" component={WordList} />
-          <Route path="create" component={CreateWordModal} />
+          <Route path="/create" component={CreateWordModal} />
+          <Route path="/about" component={About} />
           <Route path="/" render={() => <Redirect to="/word-list"/>} exact={true} />
-
         </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
