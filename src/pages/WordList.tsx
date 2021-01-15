@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {
   IonButton, IonButtons, IonCheckbox, IonContent,
   IonFab, IonFabButton, IonHeader, IonIcon,
-  IonItem, IonPage, IonTitle, IonToolbar
+  IonItem, IonLabel, IonNote, IonPage, IonText, IonTitle, IonToolbar, useIonViewWillEnter
 } from '@ionic/react';
 import CreateWordButton from '../components/CreateWordButton';
 import DeleteWordButton from '../components/DeleteWordButton';
@@ -17,9 +17,9 @@ const WordList: React.FC = () => {
   const [showFarewellToast, setShowFarewellToast] = useState(false);
 
   let history = useHistory();
-  useEffect(() => {
-    setWordList(JSON.parse(localStorage.getItem("wordList") || '{}'))
-  }, [])
+  useIonViewWillEnter(() => {
+    setWordList(JSON.parse(localStorage.getItem("wordList") || '{}'));
+  }, []);
 
   function deleteWord() {
     console.log("delete word list", deleteList);
@@ -64,8 +64,10 @@ const WordList: React.FC = () => {
             }></IonCheckbox>
             {// TODO: 右寄せ左寄せが効かない。
             }
-            <div className="ion-text-left">{key}</div>
-            <div className="ion-text-right">{wordList[key]}</div>
+            <IonText>
+              <div>ダサ言葉 : {key}</div>
+              <div>最高言葉 : {wordList[key]}</div>
+            </IonText>
           </IonItem>
         );
       }

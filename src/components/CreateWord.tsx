@@ -55,7 +55,7 @@ const CreateWordModal: React.FC<CreateWordPageProps> = () => {
                 </IonToolbar>
             </IonHeader>
             <IonContent>
-                <IonInput value={word} placeholder="Enter Input" onIonChange={e => setWord(e.detail.value!)} className="ion-text-center ion-padding" clearInput></IonInput>
+                <IonInput value={word} placeholder="略したい言葉を入力" onIonChange={e => setWord(e.detail.value!)} className="ion-text-center"/>
                 {nowLoading ? <LoadingComponent /> : <div style={{ textAlign: "center" }}>{result}</div>}
                 {result ?
                     <section style={{ textAlign: "center" }}>
@@ -63,7 +63,9 @@ const CreateWordModal: React.FC<CreateWordPageProps> = () => {
                         <IonButton onClick={() => { init(); history.goBack() }} color="danger">保存しない</IonButton>
                         <IonButton onClick={() => init()}>もう一度</IonButton>
                     </section>
-                    : <IonButton onClick={() => submitWord(word)}>これでOK</IonButton>
+                    : <section style={{ textAlign: "center" }}>
+                        <IonButton onClick={() => submitWord(word)}>これでOK</IonButton>
+                      </section>
                 }
             </IonContent>
         </IonPage>
