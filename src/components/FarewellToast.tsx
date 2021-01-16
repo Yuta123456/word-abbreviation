@@ -11,6 +11,7 @@ const FarewellToast: React.FC<FarewellToatsProps> = (props) => {
         onDidDismiss={() => props.setShowFarewellToast(false)}
         message="いままで略してくれてありがとうね…"
         duration={2000}
+        position="top"
         />
     );
     

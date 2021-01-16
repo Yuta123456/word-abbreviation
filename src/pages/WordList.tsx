@@ -1,22 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   IonButton, IonButtons, IonCheckbox, IonContent,
-  IonFab, IonFabButton, IonHeader, IonIcon,
-  IonItem, IonLabel, IonNote, IonPage, IonText, IonTitle, IonToolbar, useIonViewWillEnter
+  IonHeader, IonIcon,
+  IonItem, IonPage, IonText, IonTitle, IonToolbar, useIonViewWillEnter
 } from '@ionic/react';
 import CreateWordButton from '../components/CreateWordButton';
 import DeleteWordButton from '../components/DeleteWordButton';
 import DeleteAlert from '../components/DeleteAlert';
 import FarewellToast from '../components/FarewellToast'
-import { useHistory } from 'react-router';
-import { add, help, helpCircleOutline } from 'ionicons/icons';
+import { helpCircleOutline } from 'ionicons/icons';
 const WordList: React.FC = () => {
   const [wordList, setWordList] = useState(JSON.parse(localStorage.getItem("wordList") || '{}'));
   const [showAlert, setShowAlert] = useState(false);
   const [deleteList, setDeleteList] = useState(new Set<string>());
   const [showFarewellToast, setShowFarewellToast] = useState(false);
 
-  let history = useHistory();
   useIonViewWillEnter(() => {
     setWordList(JSON.parse(localStorage.getItem("wordList") || '{}'));
   }, []);
