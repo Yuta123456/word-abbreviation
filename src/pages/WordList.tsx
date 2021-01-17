@@ -9,6 +9,7 @@ import DeleteWordButton from '../components/DeleteWordButton';
 import DeleteAlert from '../components/DeleteAlert';
 import FarewellToast from '../components/FarewellToast'
 import { helpCircleOutline } from 'ionicons/icons';
+import { TwitterIcon, TwitterShareButton } from 'react-share';
 const WordList: React.FC = () => {
   const [wordList, setWordList] = useState(JSON.parse(localStorage.getItem("wordList") || '{}'));
   const [showAlert, setShowAlert] = useState(false);
@@ -44,7 +45,8 @@ const WordList: React.FC = () => {
         </IonToolbar>
       </IonHeader>
     <IonContent>
-      {Object.keys(wordList).map((key) => {
+    
+    {Object.keys(wordList).map((key) => {
         return (
           <IonItem key={key}>
             <IonCheckbox onIonChange={

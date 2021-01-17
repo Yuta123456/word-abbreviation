@@ -12,7 +12,6 @@ const DeleteAlert: React.FC<AlertProps> = (props) => {
     <IonAlert
       isOpen={props.showAlert}
       onDidDismiss={() => props.setShowAlert(false)}
-      //cssClass='my-custom-class'
       header={'確認'}
       message={'選択した言葉たちを削除してもよろしいですか？'}
       buttons={[

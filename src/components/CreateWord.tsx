@@ -3,25 +3,31 @@ import { IonBackButton, IonButton, IonButtons, IonContent, IonHeader, IonInput, 
 import Axios from 'axios';
 import LoadingComponent from './LoadingComponent';
 import { useHistory } from 'react-router-dom';
-type CreateWordPageProps = {
-    history: History
-}
+import { FacebookIcon, TwitterIcon, TwitterShareButton } from "react-share";
+import CreateWordComponent from './CreateWordComponent';
+import ResultPage from './ResultPage';
 
-const CreateWordModal: React.FC<CreateWordPageProps> = () => {
+const CreateWordModal: React.FC = () => {
     const [word, setWord] = useState("");
     const [result, setResult] = useState("");
     const [nowLoading, setNowLoading] = useState(false);
+    const [failed, setFailed] = useState(false);
     let history = useHistory();
     function sleep(msec: number) { return new Promise(resolve => setTimeout(resolve, msec)) };
     const api_url = "https://waapi-y5tash35xa-an.a.run.app/abbreviation"
-    function submitWord(submit_text: string) {
+    function submitWord() {
+        const submit_text = word
         setNowLoading(true);
         Axios.post(api_url, {
             post_text: { submit_text },
         })
             .then((response) => {
+                console.log(response);
                 setResult(response.data.result);
-                sleep(5000);
+                setNowLoading(false);
+            }).catch((ex) => {
+                setFailed(true);
+            }).then(() => {
                 setNowLoading(false);
             })
     }
@@ -29,7 +35,7 @@ const CreateWordModal: React.FC<CreateWordPageProps> = () => {
         setResult("");
         setWord("");
     }
-    function saveWord(word: string, result: string) {
+    function saveWord() {
         interface WList {
             [name: string]: string;
         }
@@ -44,6 +50,9 @@ const CreateWordModal: React.FC<CreateWordPageProps> = () => {
         init();
         history.push("./word-list")
     }
+    function createTweetText() {
+        return "お前らまだ「" + word + "」なんて使ってんのwww\n" + "今の時代は「" + result + "」だろwwww";
+    }
     return (
         <IonPage>
             <IonHeader>
@@ -54,23 +63,25 @@ const CreateWordModal: React.FC<CreateWordPageProps> = () => {
                     </IonButtons>
                 </IonToolbar>
             </IonHeader>
-            <IonContent>
-                <IonInput value={word} placeholder="略したい言葉を入力"
-                    onIonChange={e => setWord(e.detail.value!)}
-                    className="ion-text-center"
-                    disabled={result !== ""} />
-                {nowLoading ? <LoadingComponent /> : <div style={{ textAlign: "center" }}>結果 : {result}</div>}
-                {result ?
-                    <section style={{ textAlign: "center" }}>
-                        <IonButton color="success" onClick={() => saveWord(word, result)}>保存する</IonButton>
-                        <IonButton onClick={() => { init(); history.goBack() }} color="danger">保存しない</IonButton>
-                        <IonButton onClick={() => init()}>もう一度</IonButton>
-                    </section>
-                    : <section style={{ textAlign: "center" }}>
-                        <IonButton onClick={() => submitWord(word)}>これでOK</IonButton>
-                    </section>
-                }
-            </IonContent>
+            {(result === "") ?
+                // word, buttonDisabled, init, submitWord
+                <CreateWordComponent
+                    setWord={setWord}
+                    word={word}
+                    init={init}
+                    submitWord={submitWord}
+                    nowLoading={nowLoading} 
+                    failed={failed}/>
+                :
+                // saveWord, init, createTweetText
+                <ResultPage
+                    saveWord={saveWord}
+                    init={init}
+                    createTweetText={createTweetText}
+                    result={result}
+                />
+                    
+            }
         </IonPage>
     );
 };
