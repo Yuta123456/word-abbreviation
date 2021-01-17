@@ -1,7 +1,5 @@
-import Axios from 'axios';
+
 import LoadingComponent from './LoadingComponent';
-import { useHistory } from 'react-router-dom';
-import { FacebookIcon, TwitterIcon, TwitterShareButton } from "react-share";
 import React from 'react';
 import { IonButton, IonContent, IonInput } from '@ionic/react';
 type CreateWordComponentProps = {
@@ -20,7 +18,7 @@ const CreateWordComponent: React.FC<CreateWordComponentProps> = (props) => {
                 onIonChange={e => props.setWord(e.detail.value!)}
                 className="ion-text-center"
             />
-            {props.nowLoading && <LoadingComponent /> }
+            {props.nowLoading && <LoadingComponent />}
             {props.failed && <div className="ion-text-center">この言葉は略せない...</div>}
             <section style={{ textAlign: "center" }}>
                 <IonButton onClick={() => props.submitWord()}>これでOK</IonButton>
