@@ -74,6 +74,7 @@ const CreateWordModal: React.FC = () => {
                     init={init}
                     createTweetText={createTweetText}
                     result={result}
+                    word={word}
                 />
 
             }
