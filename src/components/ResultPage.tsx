@@ -11,11 +11,11 @@ const ResultPage: React.FC<ResultPageProps> = (props) => {
     return (
         <IonContent className="ion-text-center">
             <svg width="100%" height="70%">
-                
-                <rect x="15%" y="20%" rx="20" ry="20" 
+
+                <rect x="15%" y="20%" rx="20" ry="20"
                     width="70%" height="50%" fill="#3880ff">
                 </rect>
-                <rect x="17%" y="30%" rx="0" ry="0" 
+                <rect x="17%" y="30%" rx="0" ry="0"
                     width="66%" height="38%" fill="#FFF">
                 </rect>
                 <text x="50%" y="27%" fill="#FFF" textAnchor="middle" fontSize="20">【結果】</text>
@@ -25,6 +25,7 @@ const ResultPage: React.FC<ResultPageProps> = (props) => {
             <IonButton onClick={() => props.init()}>もう一度</IonButton>
             <IonButton>
                 <TwitterShareButton
+                    // :TODO URLを変数で取得
                     url={"https://6002c2e372793e0007898f10--blissful-benz-cd10aa.netlify.app/"}
                     title={props.createTweetText()}
                     hashtags={["waApp"]}>

@@ -48,7 +48,7 @@ const CreateWordModal: React.FC = () => {
         history.push("./word-list")
     }
     function createTweetText() {
-        return `お前らまだ「 ${word} 」なんて使ってんのwww\n + "今の時代は「 + ${result} + 」だろwwww`;
+        return `お前らまだ「 ${word} 」なんて使ってんのwww\n 今の時代は「 ${result} 」だろwwww`;
     }
     return (
         <IonPage>
@@ -61,23 +61,21 @@ const CreateWordModal: React.FC = () => {
                 </IonToolbar>
             </IonHeader>
             {(result === "") ?
-                // word, buttonDisabled, init, submitWord
                 <CreateWordComponent
                     setWord={setWord}
                     word={word}
                     init={init}
                     submitWord={submitWord}
-                    nowLoading={nowLoading} 
-                    failed={failed}/>
+                    nowLoading={nowLoading}
+                    failed={failed} />
                 :
-                // saveWord, init, createTweetText
                 <ResultPage
                     saveWord={saveWord}
                     init={init}
                     createTweetText={createTweetText}
                     result={result}
                 />
-                    
+
             }
         </IonPage>
     );

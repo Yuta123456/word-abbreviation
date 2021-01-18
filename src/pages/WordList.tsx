@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import {
-  IonButton, IonButtons, IonCheckbox, IonContent,
+  IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCheckbox, IonContent,
   IonHeader, IonIcon,
-  IonItem, IonPage, IonText, IonTitle, IonToolbar, useIonViewWillEnter
+  IonItem, IonLabel, IonNote, IonPage, IonText, IonTitle, IonToolbar, useIonViewWillEnter
 } from '@ionic/react';
 import CreateWordButton from '../components/CreateWordButton';
 import DeleteWordButton from '../components/DeleteWordButton';
@@ -37,52 +37,53 @@ const WordList: React.FC = () => {
           <IonButtons slot="end" >
             <IonButton routerLink="./about" >
               <IonButton>
-              <IonIcon icon={helpCircleOutline} size="large"/>
+                <IonIcon icon={helpCircleOutline} size="large" />
               </IonButton>
             </IonButton>
           </IonButtons>
         </IonToolbar>
       </IonHeader>
-    <IonContent>
-    
-    {Object.keys(wordList).map((key) => {
-        return (
-          <IonItem key={key}>
-            <IonCheckbox onIonChange={
-              () => {
-                if (deleteList.has(key)) {
-                  const newDeleteList = new Set(deleteList);
-                  newDeleteList.delete(key)
-                  setDeleteList(newDeleteList);
-                } else {
-                  const newDeleteList = new Set(deleteList);
-                  newDeleteList.add(key)
-                  setDeleteList(newDeleteList);
+      <IonContent>
+
+        {Object.keys(wordList).map((key) => {
+          return (
+            <IonItem key={key}>
+              <IonCardHeader>
+                <IonCardTitle>
+                  最高言葉 : {wordList[key]}
+                </IonCardTitle>
+                <IonCardSubtitle>
+                  ダサ言葉 : {key}
+                </IonCardSubtitle>
+              </IonCardHeader>
+              <IonCheckbox slot="start" onIonChange={
+                () => {
+                  if (deleteList.has(key)) {
+                    const newDeleteList = new Set(deleteList);
+                    newDeleteList.delete(key)
+                    setDeleteList(newDeleteList);
+                  } else {
+                    const newDeleteList = new Set(deleteList);
+                    newDeleteList.add(key)
+                    setDeleteList(newDeleteList);
+                  }
                 }
-              }
-            }></IonCheckbox>
-            {// TODO: 右寄せ左寄せが効かない。
-            }
-            <IonText>
-              <div>ダサ言葉 : {key}</div>
-              <div>最高言葉 : {wordList[key]}</div>
-            </IonText>
-          </IonItem>
-        );
-      }
-      )}
-      <DeleteAlert showAlert={showAlert}
-        setShowAlert={setShowAlert}
-        deleteWord={deleteWord}
-        setDeleteList={setDeleteList}
-        setShowFarewellToast={setShowFarewellToast}
-      />
-      <CreateWordButton />
-      <DeleteWordButton setShowAlert={setShowAlert} disabled={deleteList.size === 0} />
-      <FarewellToast setShowFarewellToast={setShowFarewellToast} showFarewellToast={showFarewellToast} />
-    </IonContent>
+              }></IonCheckbox>
+            </IonItem>
+          );
+        }
+        )}
+        <DeleteAlert showAlert={showAlert}
+          setShowAlert={setShowAlert}
+          deleteWord={deleteWord}
+          setDeleteList={setDeleteList}
+          setShowFarewellToast={setShowFarewellToast}
+        />
+        <CreateWordButton />
+        <DeleteWordButton setShowAlert={setShowAlert} disabled={deleteList.size === 0} />
+        <FarewellToast setShowFarewellToast={setShowFarewellToast} showFarewellToast={showFarewellToast} />
+      </IonContent>
     </IonPage>
-      
   );
 };
 
