@@ -3,7 +3,7 @@ import { IonBackButton, IonButtons, IonHeader, IonPage, IonTitle, IonToolbar } f
 import Axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import CreateWordComponent from './CreateWordComponent';
-import ResultPage from './ResultPage';
+import ResultPage from '../result/ResultPage';
 
 const CreateWordModal: React.FC = () => {
     const [word, setWord] = useState("");

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import {
-  IonButton, IonButtons, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCheckbox, IonContent,
+  IonButton, IonButtons, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCheckbox, IonContent,
   IonHeader, IonIcon,
-  IonItem, IonLabel, IonNote, IonPage, IonText, IonTitle, IonToolbar, useIonViewWillEnter
+  IonItem, IonPage, IonTitle, IonToolbar, useIonViewWillEnter
 } from '@ionic/react';
-import CreateWordButton from '../components/CreateWordButton';
-import DeleteWordButton from '../components/DeleteWordButton';
-import DeleteAlert from '../components/DeleteAlert';
-import FarewellToast from '../components/FarewellToast'
+import CreateWordButton from './create/CreateWordButton';
+import DeleteWordButton from './delete/DeleteWordButton';
+import DeleteAlert from './delete/DeleteAlert';
+import FarewellToast from './delete/FarewellToast'
 import { helpCircleOutline } from 'ionicons/icons';
 const WordList: React.FC = () => {
   const [wordList, setWordList] = useState(JSON.parse(localStorage.getItem("wordList") || '{}'));

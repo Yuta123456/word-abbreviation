@@ -24,8 +24,8 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
-import CreateWordModal from './components/CreateWord';
-import About from './components/About';
+import CreateWordModal from './pages/create/CreateWord';
+import About from './pages/about/About';
 
 const App: React.FC = () => (
   <IonApp>

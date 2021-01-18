@@ -1,5 +1,5 @@
 
-import LoadingComponent from './LoadingComponent';
+import LoadingComponent from '../../components/LoadingComponent';
 import React from 'react';
 import { IonButton, IonContent, IonInput } from '@ionic/react';
 type CreateWordComponentProps = {
