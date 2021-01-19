@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import {
-  IonButton, IonButtons, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCheckbox, IonContent,
+  IonButton, IonButtons, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCheckbox, IonContent,
   IonHeader, IonIcon,
-  IonItem, IonPage, IonTitle, IonToolbar, useIonViewWillEnter
+  IonItem, IonList, IonPage, IonTitle, IonToolbar, useIonViewWillEnter
 } from '@ionic/react';
 import CreateWordButton from './create/CreateWordButton';
 import DeleteWordButton from './delete/DeleteWordButton';
 import DeleteAlert from './delete/DeleteAlert';
 import FarewellToast from './delete/FarewellToast'
 import { helpCircleOutline } from 'ionicons/icons';
+import { TwitterShareButton } from 'react-share';
+import { useLocation } from 'react-router-dom';
 const WordList: React.FC = () => {
   const [wordList, setWordList] = useState(JSON.parse(localStorage.getItem("wordList") || '{}'));
   const [showAlert, setShowAlert] = useState(false);
@@ -29,6 +31,9 @@ const WordList: React.FC = () => {
     console.log("run delete word")
     localStorage.setItem("wordList", JSON.stringify(newWordList));
   }
+  function createTweetText(word: string, result: string) {
+    return `お前らまだ「 ${word} 」なんて使ってんのwww\n 今の時代は「 ${result} 」だろwwww`;
+  }
   return (
     <IonPage>
       <IonHeader>
@@ -44,35 +49,49 @@ const WordList: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-
-        {Object.keys(wordList).map((key) => {
-          return (
-            <IonItem key={key}>
-              <IonCardHeader>
-                <IonCardTitle>
-                  最高言葉 : {wordList[key]}
-                </IonCardTitle>
-                <IonCardSubtitle>
-                  ダサ言葉 : {key}
-                </IonCardSubtitle>
-              </IonCardHeader>
-              <IonCheckbox slot="start" onIonChange={
-                () => {
-                  if (deleteList.has(key)) {
-                    const newDeleteList = new Set(deleteList);
-                    newDeleteList.delete(key)
-                    setDeleteList(newDeleteList);
-                  } else {
-                    const newDeleteList = new Set(deleteList);
-                    newDeleteList.add(key)
-                    setDeleteList(newDeleteList);
+        <IonList>
+          {Object.keys(wordList).map((key) => {
+            return (
+              <IonItem key={key}>
+                <IonCardHeader>
+                  <IonCardTitle>
+                    最高言葉 : {wordList[key]}
+                  </IonCardTitle>
+                  <IonCardSubtitle>
+                    ダサ言葉 : {key}
+                  </IonCardSubtitle>
+                </IonCardHeader>
+                <IonCheckbox slot="start" onIonChange={
+                  () => {
+                    if (deleteList.has(key)) {
+                      const newDeleteList = new Set(deleteList);
+                      newDeleteList.delete(key)
+                      setDeleteList(newDeleteList);
+                    } else {
+                      const newDeleteList = new Set(deleteList);
+                      newDeleteList.add(key)
+                      setDeleteList(newDeleteList);
+                    }
                   }
-                }
-              }></IonCheckbox>
-            </IonItem>
-          );
-        }
-        )}
+                }></IonCheckbox>
+                <IonCardContent>
+                  <IonButton>
+                    <TwitterShareButton
+                      // :TODO URLを変数で取得
+                      //location.hrefで現在のURLを取得
+                      url={window.location.host}
+                      title={createTweetText(key, wordList[key])}
+                      hashtags={["waApp"]}>
+                      <i className="fab fa-twitter" />
+                                　Tweetする
+                </TwitterShareButton>
+                  </IonButton>
+                </IonCardContent>
+              </IonItem>
+            );
+          }
+          )}
+        </IonList>
         <DeleteAlert showAlert={showAlert}
           setShowAlert={setShowAlert}
           deleteWord={deleteWord}

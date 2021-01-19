@@ -4,7 +4,6 @@ import { TwitterShareButton } from "react-share";
 type ResultPageProps = {
     saveWord: () => void
     init: () => void
-    createTweetText: () => string
     result: string
     word: string
 }
@@ -25,16 +24,6 @@ const ResultPage: React.FC<ResultPageProps> = (props) => {
             </svg>
             <IonButton color="success" onClick={() => props.saveWord()}>保存する</IonButton>
             <IonButton onClick={() => props.init()}>もう一度</IonButton>
-            <IonButton>
-                <TwitterShareButton
-                    // :TODO URLを変数で取得
-                    url={"https://6002c2e372793e0007898f10--blissful-benz-cd10aa.netlify.app/"}
-                    title={props.createTweetText()}
-                    hashtags={["waApp"]}>
-                    <i className="fab fa-twitter" />
-                                　Tweetする
-                </TwitterShareButton>
-            </IonButton>
         </IonContent>
     );
 }
