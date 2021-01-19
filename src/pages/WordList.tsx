@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import {
   IonButton, IonButtons, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCheckbox, IonContent,
   IonHeader, IonIcon,
- IonList, IonPage, IonTitle, IonToolbar, useIonViewWillEnter
+  IonItem,
+  IonList, IonPage, IonTitle, IonToolbar, useIonViewWillEnter
 } from '@ionic/react';
 import CreateWordButton from './create/CreateWordButton';
 import DeleteWordButton from './delete/DeleteWordButton';
 import DeleteAlert from './delete/DeleteAlert';
 import FarewellToast from './delete/FarewellToast'
-import { helpCircleOutline } from 'ionicons/icons';
+import { helpCircleOutline, pin } from 'ionicons/icons';
 import { TwitterShareButton } from 'react-share';
 const WordList: React.FC = () => {
   const [wordList, setWordList] = useState(JSON.parse(localStorage.getItem("wordList") || '{}'));
@@ -39,7 +40,7 @@ const WordList: React.FC = () => {
         <IonToolbar>
           <IonTitle>俺が略した言葉たち</IonTitle>
           <IonButtons slot="end" >
-            <IonButton routerLink="./about" >
+            <IonButton routerLink="./about">
               <IonButton>
                 <IonIcon icon={helpCircleOutline} size="large" />
               </IonButton>
@@ -56,23 +57,21 @@ const WordList: React.FC = () => {
                   <IonCardTitle>
                     最高言葉 : {wordList[key]}
                   </IonCardTitle>
-                <IonCardSubtitle>
-                  ダサ言葉 : {key}
-                </IonCardSubtitle>
+                  <IonCardSubtitle>
+                    ダサ言葉 : {key}
+                  </IonCardSubtitle>
                 </IonCardHeader>
-                <IonToolbar>
-                  <IonButtons slot="end">
-                    <IonButton>
-                      <TwitterShareButton
-                        url={window.location.host}
-                        title={createTweetText(key, wordList[key])}
-                        hashtags={["waApp"]}>
-                        <i className="fab fa-twitter" />
+                <IonItem>
+                  <IonButton slot="end">
+                    <TwitterShareButton
+                      url={window.location.host}
+                      title={createTweetText(key, wordList[key])}
+                      hashtags={["waApp"]}>
+                      <i className="fab fa-twitter" />
                                 　Tweetする
-                </TwitterShareButton>
-                    </IonButton>
-                  </IonButtons>
-                </IonToolbar>
+                      </TwitterShareButton>
+                  </IonButton>
+                </IonItem>
                 <IonCheckbox slot="start" onIonChange={
                   () => {
                     if (deleteList.has(key)) {
@@ -85,7 +84,7 @@ const WordList: React.FC = () => {
                       setDeleteList(newDeleteList);
                     }
                   }
-                }></IonCheckbox>
+                } />
               </IonCard>
             );
           }
