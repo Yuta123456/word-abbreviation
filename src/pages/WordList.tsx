@@ -9,7 +9,7 @@ import CreateWordButton from './create/CreateWordButton';
 import DeleteWordButton from './delete/DeleteWordButton';
 import DeleteAlert from './delete/DeleteAlert';
 import FarewellToast from './delete/FarewellToast'
-import { helpCircleOutline, pin } from 'ionicons/icons';
+import { helpCircleOutline } from 'ionicons/icons';
 import { TwitterShareButton } from 'react-share';
 const WordList: React.FC = () => {
   const [wordList, setWordList] = useState(JSON.parse(localStorage.getItem("wordList") || '{}'));
