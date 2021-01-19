@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import {
-  IonButton, IonButtons, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCheckbox, IonContent,
+  IonButton, IonButtons, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCheckbox, IonContent,
   IonHeader, IonIcon,
-  IonItem, IonList, IonPage, IonTitle, IonToolbar, useIonViewWillEnter
+ IonList, IonPage, IonTitle, IonToolbar, useIonViewWillEnter
 } from '@ionic/react';
 import CreateWordButton from './create/CreateWordButton';
 import DeleteWordButton from './delete/DeleteWordButton';
@@ -47,19 +47,32 @@ const WordList: React.FC = () => {
           </IonButtons>
         </IonToolbar>
       </IonHeader>
-      <IonContent>
+      <IonContent fullscreen>
         <IonList>
           {Object.keys(wordList).map((key) => {
             return (
-              <IonItem key={key}>
+              <IonCard key={key}>
                 <IonCardHeader>
                   <IonCardTitle>
                     最高言葉 : {wordList[key]}
                   </IonCardTitle>
-                  <IonCardSubtitle>
-                    ダサ言葉 : {key}
-                  </IonCardSubtitle>
+                <IonCardSubtitle>
+                  ダサ言葉 : {key}
+                </IonCardSubtitle>
                 </IonCardHeader>
+                <IonToolbar>
+                  <IonButtons slot="end">
+                    <IonButton>
+                      <TwitterShareButton
+                        url={window.location.host}
+                        title={createTweetText(key, wordList[key])}
+                        hashtags={["waApp"]}>
+                        <i className="fab fa-twitter" />
+                                　Tweetする
+                </TwitterShareButton>
+                    </IonButton>
+                  </IonButtons>
+                </IonToolbar>
                 <IonCheckbox slot="start" onIonChange={
                   () => {
                     if (deleteList.has(key)) {
@@ -73,20 +86,7 @@ const WordList: React.FC = () => {
                     }
                   }
                 }></IonCheckbox>
-                <IonCardContent>
-                  <IonButton>
-                    <TwitterShareButton
-                      // :TODO URLを変数で取得
-                      //location.hrefで現在のURLを取得
-                      url={window.location.host}
-                      title={createTweetText(key, wordList[key])}
-                      hashtags={["waApp"]}>
-                      <i className="fab fa-twitter" />
-                                　Tweetする
-                </TwitterShareButton>
-                  </IonButton>
-                </IonCardContent>
-              </IonItem>
+              </IonCard>
             );
           }
           )}
