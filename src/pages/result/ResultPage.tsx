@@ -1,6 +1,5 @@
 import { IonButton, IonContent } from "@ionic/react";
 import React from "react";
-import { TwitterShareButton } from "react-share";
 type ResultPageProps = {
     saveWord: () => void
     init: () => void

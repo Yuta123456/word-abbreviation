@@ -10,7 +10,6 @@ import DeleteAlert from './delete/DeleteAlert';
 import FarewellToast from './delete/FarewellToast'
 import { helpCircleOutline } from 'ionicons/icons';
 import { TwitterShareButton } from 'react-share';
-import { useLocation } from 'react-router-dom';
 const WordList: React.FC = () => {
   const [wordList, setWordList] = useState(JSON.parse(localStorage.getItem("wordList") || '{}'));
   const [showAlert, setShowAlert] = useState(false);
