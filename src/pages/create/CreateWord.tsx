@@ -22,7 +22,7 @@ const CreateWordModal: React.FC = () => {
                 setFailed(false);
                 setResult(response.data.result);
                 setNowLoading(false);
-            }).catch((ex) => {
+            }).catch(() => {
                 setFailed(true);
             }).then(() => {
                 setNowLoading(false);
@@ -72,7 +72,6 @@ const CreateWordModal: React.FC = () => {
                     result={result}
                     word={word}
                 />
-
             }
         </IonPage>
     );

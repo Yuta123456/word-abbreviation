@@ -8,7 +8,6 @@ const CreateWordButton: React.FC = () => {
       <IonFabButton routerLink="./create">
         <IonIcon icon={add} />
       </IonFabButton>
-      
     </IonFab>
   );
 };

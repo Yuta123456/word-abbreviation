@@ -1,0 +1,9 @@
+.half-modal {
+    align-items: flex-end;
+    .modal-wrapper {
+        height: 20px !important;
+    }
+    ion-header ion-toolbar:first-of-type {
+        padding-top: 0;
+    }
+}

@@ -1,32 +1,32 @@
 import React, { useState } from 'react';
 import {
-  IonButton, IonButtons, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCheckbox, IonContent,
+  IonButton, IonButtons, IonContent,
   IonHeader, IonIcon,
   IonItem,
-  IonList, IonPage, IonTitle, IonToolbar, useIonViewWillEnter
+  IonLabel,
+  IonList, IonPage, IonText, IonTitle, IonToolbar, useIonViewWillEnter
 } from '@ionic/react';
 import CreateWordButton from './create/CreateWordButton';
-import DeleteWordButton from './delete/DeleteWordButton';
 import DeleteAlert from './delete/DeleteAlert';
 import FarewellToast from './delete/FarewellToast'
 import { helpCircleOutline } from 'ionicons/icons';
-import { TwitterShareButton } from 'react-share';
+import ActionSheet from '../components/ActionSheet';
+import ShareButtons from '../components/ShareButtonsModal';
 const WordList: React.FC = () => {
   const [wordList, setWordList] = useState(JSON.parse(localStorage.getItem("wordList") || '{}'));
   const [showAlert, setShowAlert] = useState(false);
-  const [deleteList, setDeleteList] = useState(new Set<string>());
   const [showFarewellToast, setShowFarewellToast] = useState(false);
-
+  const [showActionSheet, setShowActionSheet] = useState(false);
+  const [showShareButtonsModal, setShowShareButtonsModal] = useState(false);
+  const [selectItem, setSelectItem] = useState("");
   useIonViewWillEnter(() => {
     setWordList(JSON.parse(localStorage.getItem("wordList") || '{}'));
   }, []);
 
   function deleteWord() {
-    console.log("delete word list", deleteList);
+    console.log("delete word list", selectItem);
     const newWordList = Object.assign({}, wordList);
-    deleteList.forEach((value: string) => {
-      delete newWordList[value];
-    })
+    delete newWordList[selectItem];
     setWordList(newWordList);
     console.log("run delete word")
     localStorage.setItem("wordList", JSON.stringify(newWordList));
@@ -52,40 +52,41 @@ const WordList: React.FC = () => {
         <IonList>
           {Object.keys(wordList).map((key) => {
             return (
-              <IonCard key={key}>
-                <IonCardHeader>
-                  <IonCardTitle>
+              //   <IonItem>
+              //   <IonLabel className="ion-text-wrap">
+              //     <IonText color="primary">
+              //       <h3>H3 Primary Title</h3>
+              //     </IonText>
+              //     <p>Paragraph line 1</p>
+              //     <IonText color="secondary">
+              //       <p>Paragraph line 2 secondary</p>
+              //     </IonText>
+              //   </IonLabel>
+              // </IonItem>
+              // タッチしたら、アクションが出てきて共有か削除か選べるようにしよう
+              // Twitterで共有する処理が書けるかどうかは不明
+              // <IonItem lines="none">
+              //       <IonButton>
+              //         <TwitterShareButton
+              //           url={window.location.host}
+              //           title={createTweetText(key, wordList[key])}
+              //           hashtags={["waApp"]}>
+              //           <i className="fab fa-twitter" />
+              //                 　Tweetする
+              //       </TwitterShareButton>
+              //       </IonButton>
+              //     </IonItem>
+              <IonItem key={key} button onClick={() => { setShowActionSheet(true); setSelectItem(key);}}>
+                <IonLabel className="ion-text-wrap">
+                  <IonText color="dark">
                     最高言葉 : {wordList[key]}
-                  </IonCardTitle>
-                  <IonCardSubtitle>
+                  </IonText>
+                  <br />
+                  <IonText>
                     ダサ言葉 : {key}
-                  </IonCardSubtitle>
-                </IonCardHeader>
-                <IonItem>
-                  <IonButton slot="end">
-                    <TwitterShareButton
-                      url={window.location.host}
-                      title={createTweetText(key, wordList[key])}
-                      hashtags={["waApp"]}>
-                      <i className="fab fa-twitter" />
-                                　Tweetする
-                      </TwitterShareButton>
-                  </IonButton>
-                </IonItem>
-                <IonCheckbox slot="start" onIonChange={
-                  () => {
-                    if (deleteList.has(key)) {
-                      const newDeleteList = new Set(deleteList);
-                      newDeleteList.delete(key)
-                      setDeleteList(newDeleteList);
-                    } else {
-                      const newDeleteList = new Set(deleteList);
-                      newDeleteList.add(key)
-                      setDeleteList(newDeleteList);
-                    }
-                  }
-                } />
-              </IonCard>
+                  </IonText>
+                </IonLabel>
+              </IonItem>
             );
           }
           )}
@@ -93,14 +94,20 @@ const WordList: React.FC = () => {
         <DeleteAlert showAlert={showAlert}
           setShowAlert={setShowAlert}
           deleteWord={deleteWord}
-          setDeleteList={setDeleteList}
           setShowFarewellToast={setShowFarewellToast}
         />
-        <CreateWordButton />
-        <DeleteWordButton setShowAlert={setShowAlert} disabled={deleteList.size === 0} />
-        <FarewellToast setShowFarewellToast={setShowFarewellToast} showFarewellToast={showFarewellToast} />
-      </IonContent>
-    </IonPage>
+        <ShareButtons setShowShareButtonsModal={setShowShareButtonsModal}
+                      showShareButtonsModal={showShareButtonsModal}
+                      ShareText={createTweetText(selectItem, wordList[selectItem])}/>
+        <ActionSheet showActionSheet={showActionSheet}
+          setShowActionSheet={setShowActionSheet}
+          setShowShareButtonsModal={setShowShareButtonsModal}
+          setShowAlert={setShowAlert}
+           />
+        <CreateWordButton />    
+      <FarewellToast setShowFarewellToast={setShowFarewellToast} showFarewellToast={showFarewellToast} />
+      </ IonContent>
+    </IonPage >
   );
 };
 

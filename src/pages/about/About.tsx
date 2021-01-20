@@ -18,8 +18,6 @@ const About: React.FC = () => {
             <IonContent>
                 <div className="ion-padding">
                     <h4 className="ion-text-center">このアプリについて</h4>
-
-
                     <p>このアプリは言葉を作者風に略す事が出来るアプリです。</p>
                     <ol>
                         <li>右下のボタンをタップ</li>
