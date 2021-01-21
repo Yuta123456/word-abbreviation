@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    IonButton, IonButtons, IonHeader, IonIcon, IonModal, IonTitle, IonToolbar,
+    IonButton, IonButtons, IonCol, IonHeader, IonIcon, IonModal, IonRow, IonTitle, IonToolbar,
 } from '@ionic/react';
 import { LineIcon, LineShareButton, TwitterIcon, TwitterShareButton } from 'react-share';
 import './half-modal.scss'
@@ -29,19 +29,25 @@ const ShareButtonsModal: React.FC<ShareButtonsModalProp> = (props) => {
                     </IonTitle>
                 </IonToolbar>
             </IonHeader>
-            <div className="ion-text-center">
+            <IonRow className="ion-text-center">
+                <IonCol>
                 <TwitterShareButton
                     url={window.location.host}
                     title={props.ShareText}
                     hashtags={["waApp"]} >
                     <TwitterIcon round={true} />
-                </TwitterShareButton>
+                </TwitterShareButton><br/>
+                Twitterでシェアする
+                </IonCol>
+                <IonCol>
                 <LineShareButton
                     title={props.ShareText}
                     url={window.location.host}>
                     <LineIcon round={true} />
-                </LineShareButton>
-            </div>
+                </LineShareButton><br/>
+                LINEでシェアする
+                </IonCol>
+            </IonRow>
         </IonModal>
     );
 }
