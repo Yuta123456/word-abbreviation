@@ -3,7 +3,6 @@ import {
   IonButton, IonButtons, IonCardSubtitle, IonContent,
   IonHeader, IonIcon,
   IonItem,
-  IonItemDivider,
   IonLabel,
   IonList, IonListHeader, IonNote, IonPage, IonText, IonTitle, IonToolbar, useIonViewWillEnter
 } from '@ionic/react';

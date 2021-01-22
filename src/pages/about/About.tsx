@@ -1,14 +1,12 @@
 import {
-    IonBackButton, IonButton, IonButtons, IonCol, IonContent,
-    IonHeader, IonIcon, IonItem, IonList, IonPage, IonRouterLink, IonRow, IonText, IonTitle, IonToolbar
+    IonButton, IonButtons, IonCol, IonContent,
+    IonHeader, IonIcon, IonPage, IonRow, IonTitle, IonToolbar
 } from '@ionic/react';
-import { arrowBack, chevronBackOutline } from 'ionicons/icons';
+import { chevronBackOutline } from 'ionicons/icons';
 import React from 'react';
-import { useHistory } from 'react-router';
 import { NavHashLink } from 'react-router-hash-link';
 import './about.css';
 const About: React.FC = () => {
-    let history = useHistory();
     return (
         <IonPage>
             <IonHeader>

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { IonBackButton, IonButton, IonButtons, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonButtons, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import Axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import CreateWordComponent from './CreateWordComponent';
 import ResultPage from '../result/ResultPage';
-import { arrowBack, chevronBackOutline } from 'ionicons/icons';
+import { chevronBackOutline } from 'ionicons/icons';
 
 const CreateWordModal: React.FC = () => {
     const [word, setWord] = useState("");
