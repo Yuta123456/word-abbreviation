@@ -6,5 +6,11 @@
 サイト公開済み
 https://kotobazz.com
 # インストール方法
-`npm i`
-`ionic serve`
+
+```
+$ git clone https://github.com/Yuta123456/word-abbreviation
+$ cd word-abbreviation
+$ npm i
+$ ionic serve
+```
+
