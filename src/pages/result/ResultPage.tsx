@@ -21,8 +21,8 @@ const ResultPage: React.FC<ResultPageProps> = (props) => {
                 <text x="50%" y="50%" fill="#000" textAnchor="middle" fontSize="30">{props.result}</text>
                 <text x="50%" y="65%" fill="#000" textAnchor="middle" fontSize="20">に生まれ変わった！</text>
             </svg>
-            <IonButton color="success" onClick={() => props.saveWord()}>保存する</IonButton>
-            <IonButton onClick={() => props.init()}>もう一度</IonButton>
+            <IonButton color="success" onClick={() => props.saveWord()} aria-label="保存する">保存する</IonButton>
+            <IonButton onClick={() => props.init()} aria-label="もう一度">もう一度</IonButton>
         </IonContent>
     );
 }

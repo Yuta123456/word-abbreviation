@@ -54,7 +54,7 @@ const CreateWordModal: React.FC = () => {
                 <IonToolbar>
                     <IonTitle>略語を作成する</IonTitle>
                     <IonButtons>
-                        <IonButton routerLink="/" routerDirection="back">
+                        <IonButton routerLink="/" routerDirection="back" aria-label="戻る">
                             <IonIcon icon={chevronBackOutline}/>
                                 Back
                         </IonButton>

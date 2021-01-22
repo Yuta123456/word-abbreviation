@@ -44,10 +44,8 @@ const WordList: React.FC = () => {
           <IonCardSubtitle>
           </IonCardSubtitle>
           <IonButtons slot="end" >
-            <IonButton routerLink="./about">
-              <IonButton>
+            <IonButton routerLink="./about" aria-label="ヘルプ">
                 <IonIcon icon={helpCircleOutline} size="large" />
-              </IonButton>
             </IonButton>
           </IonButtons>
         </IonToolbar>
@@ -61,7 +59,7 @@ const WordList: React.FC = () => {
         <IonList>
           {Object.keys(wordList).map((key) => {
             return (
-              <IonItem key={key} button onClick={() => { setShowActionSheet(true); setSelectItem(key);}}>
+              <IonItem key={key} button onClick={() => { setShowActionSheet(true); setSelectItem(key);}} aria-label="詳細">
                 <IonLabel className="ion-text-wrap">
                   <IonText color="dark">
                     転生後 : {wordList[key]}

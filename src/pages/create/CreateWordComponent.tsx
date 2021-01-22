@@ -22,7 +22,7 @@ const CreateWordComponent: React.FC<CreateWordComponentProps> = (props) => {
             {props.nowLoading && <LoadingComponent />}
             {props.failed && <div className="ion-text-center">この言葉は略せない...</div>}
             <section style={{ textAlign: "center" }}>
-                <IonButton onClick={() => props.submitWord()}>これでOK</IonButton>
+                <IonButton onClick={() => props.submitWord()} aria-label="送信する">これでOK</IonButton>
             </section>
         </IonContent>
     );

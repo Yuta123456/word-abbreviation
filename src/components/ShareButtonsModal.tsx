@@ -24,7 +24,7 @@ const ShareButtonsModal: React.FC<ShareButtonsModalProp> = (props) => {
             <IonHeader className="ion-no-border">
                 <IonToolbar>
                     <IonButtons slot="end">
-                        <IonButton onClick={() => {props.setShowShareButtonsModal(false)}}>
+                        <IonButton onClick={() => {props.setShowShareButtonsModal(false)}} aria-label="閉じる">
                             <IonIcon icon={close} />
                         </IonButton>
                     </IonButtons>
@@ -38,7 +38,8 @@ const ShareButtonsModal: React.FC<ShareButtonsModalProp> = (props) => {
                 <TwitterShareButton
                     url={window.location.host}
                     title={props.ShareText}
-                    hashtags={["waApp"]} >
+                    hashtags={["waApp"]} 
+                    aria-label="Twitterでシェア">
                     <TwitterIcon round={true} size={40}/>
                 </TwitterShareButton><br/>
                 Twitter
@@ -47,7 +48,8 @@ const ShareButtonsModal: React.FC<ShareButtonsModalProp> = (props) => {
                 <LineShareButton
                 // 上手くいってないので修正
                     title={props.ShareText}
-                    url={window.location.host}>
+                    url={window.location.host}
+                    aria-label="LINEでシェア">
                     <LineIcon round={true} size={40}/>
                 </LineShareButton><br/>
                 LINE

@@ -11,7 +11,7 @@ const About: React.FC = () => {
         <IonPage>
             <IonHeader>
                 <IonToolbar>
-                    <IonButtons slot="start">
+                    <IonButtons slot="start" aria-label="戻る">
                         <IonButton routerLink="/" routerDirection="back">
                             <IonIcon icon={chevronBackOutline} />
                                 Back
@@ -28,7 +28,8 @@ const About: React.FC = () => {
                             <NavHashLink className="nav-hash-link"
                                 smooth to="#about"
                                 activeClassName="selected"
-                                activeStyle={{ color: 'red' }}>
+                                activeStyle={{ color: 'red' }}
+                                aria-label="ことばず！とは">
                                 ことばず！とは
                         </NavHashLink>
                         </IonCol>
@@ -36,14 +37,16 @@ const About: React.FC = () => {
                             <NavHashLink className="nav-hash-link"
                                 smooth to="#howtouse"
                                 activeClassName="selected"
-                                activeStyle={{ color: 'red' }}>
+                                activeStyle={{ color: 'red' }}
+                                aria-label="使い方">
                                 使い方
                         </NavHashLink>
                         </IonCol>
                         <IonCol>
                             <NavHashLink className="nav-hash-link"
                                 smooth to="#tips" activeClassName="selected"
-                                activeStyle={{ color: 'red' }}>
+                                activeStyle={{ color: 'red' }}
+                                aria-label="コツ">
                                 コツ
                         </NavHashLink>
                         </IonCol>
