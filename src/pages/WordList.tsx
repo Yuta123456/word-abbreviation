@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import {
-  IonButton, IonButtons, IonContent,
+  IonButton, IonButtons, IonCardSubtitle, IonContent,
   IonHeader, IonIcon,
   IonItem,
+  IonItemDivider,
   IonLabel,
-  IonList, IonPage, IonText, IonTitle, IonToolbar, useIonViewWillEnter
+  IonList, IonListHeader, IonNote, IonPage, IonText, IonTitle, IonToolbar, useIonViewWillEnter
 } from '@ionic/react';
 import CreateWordButton from './create/CreateWordButton';
 import DeleteAlert from './delete/DeleteAlert';
@@ -38,7 +39,11 @@ const WordList: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>俺が略した言葉たち</IonTitle>
+          <IonTitle color="primary">
+            ことばず！
+          </IonTitle>
+          <IonCardSubtitle>
+          </IonCardSubtitle>
           <IonButtons slot="end" >
             <IonButton routerLink="./about">
               <IonButton>
@@ -49,42 +54,23 @@ const WordList: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
+        <IonListHeader>
+          <div className="ion-text-center">
+            俺が略した言葉たち
+          </div>
+        </IonListHeader>
         <IonList>
           {Object.keys(wordList).map((key) => {
             return (
-              //   <IonItem>
-              //   <IonLabel className="ion-text-wrap">
-              //     <IonText color="primary">
-              //       <h3>H3 Primary Title</h3>
-              //     </IonText>
-              //     <p>Paragraph line 1</p>
-              //     <IonText color="secondary">
-              //       <p>Paragraph line 2 secondary</p>
-              //     </IonText>
-              //   </IonLabel>
-              // </IonItem>
-              // タッチしたら、アクションが出てきて共有か削除か選べるようにしよう
-              // Twitterで共有する処理が書けるかどうかは不明
-              // <IonItem lines="none">
-              //       <IonButton>
-              //         <TwitterShareButton
-              //           url={window.location.host}
-              //           title={createTweetText(key, wordList[key])}
-              //           hashtags={["waApp"]}>
-              //           <i className="fab fa-twitter" />
-              //                 　Tweetする
-              //       </TwitterShareButton>
-              //       </IonButton>
-              //     </IonItem>
               <IonItem key={key} button onClick={() => { setShowActionSheet(true); setSelectItem(key);}}>
                 <IonLabel className="ion-text-wrap">
                   <IonText color="dark">
-                    最高言葉 : {wordList[key]}
+                    転生後 : {wordList[key]}
                   </IonText>
                   <br />
-                  <IonText>
-                    ダサ言葉 : {key}
-                  </IonText>
+                  <IonNote>
+                    転生前 : {key}
+                  </IonNote>
                 </IonLabel>
               </IonItem>
             );

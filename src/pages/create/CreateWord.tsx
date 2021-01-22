@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { IonBackButton, IonButtons, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonBackButton, IonButton, IonButtons, IonHeader, IonIcon, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import Axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import CreateWordComponent from './CreateWordComponent';
 import ResultPage from '../result/ResultPage';
+import { arrowBack, chevronBackOutline } from 'ionicons/icons';
 
 const CreateWordModal: React.FC = () => {
     const [word, setWord] = useState("");
@@ -53,7 +54,10 @@ const CreateWordModal: React.FC = () => {
                 <IonToolbar>
                     <IonTitle>略語を作成する</IonTitle>
                     <IonButtons>
-                        <IonBackButton defaultHref="/" />
+                        <IonButton routerLink="/" routerDirection="back">
+                            <IonIcon icon={chevronBackOutline}/>
+                                Back
+                        </IonButton>
                     </IonButtons>
                 </IonToolbar>
             </IonHeader>

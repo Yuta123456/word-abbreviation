@@ -11,18 +11,17 @@ const DeleteAlert: React.FC<AlertProps> = (props) => {
     <IonAlert
       isOpen={props.showAlert}
       onDidDismiss={() => props.setShowAlert(false)}
-      header={'確認'}
-      message={'選択した言葉を削除してもよろしいですか？'}
+      message={'この略語を削除します。よろしいですか？'}
       buttons={[
         {
-          text: 'Cancel',
+          text: 'キャンセル',
           role: 'cancel',
           handler: () => {
             props.setShowAlert(false);
           }
         },
         {
-          text: 'OK',
+          text: '削除',
           handler: () => {
             props.deleteWord();
             props.setShowFarewellToast(true);

@@ -17,20 +17,20 @@ const ActionSheet: React.FC<ActionSheetProp> = (props) => {
             onDidDismiss={() => props.setShowActionSheet(false)}
             cssClass='my-custom-class'
             buttons={[{
-                text: 'Delete',
+                text: '削除',
                 role: 'destructive',
                 icon: trash,
                 handler: () => {
                     props.setShowAlert(true);
                 }
             }, {
-                text: 'Share',
+                text: '共有',
                 icon: share,
                 handler: () => {
                     props.setShowShareButtonsModal(true);
                 }
             },{
-                text: 'Cancel',
+                text: 'キャンセル',
                 role: 'cancel',
                 handler: () => {
                 }
