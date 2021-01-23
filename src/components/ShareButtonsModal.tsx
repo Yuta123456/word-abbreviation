@@ -46,7 +46,7 @@ const ShareButtonsModal: React.FC<ShareButtonsModalProp> = (props) => {
                 </IonCol>
                 <IonCol>
                 <LineShareButton
-                // 上手くいってないので修正
+                // TODO:上手くいってないので修正
                     title={props.ShareText}
                     url={window.location.host}
                     aria-label="LINEでシェア">
