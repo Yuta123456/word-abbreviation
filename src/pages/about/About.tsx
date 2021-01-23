@@ -17,9 +17,7 @@ const About: React.FC = () => {
                                 Back
                         </IonButton>
                     </IonButtons>
-                    <IonButtons slot="end">
-                    </IonButtons>
-                    <IonTitle>ことばず</IonTitle>
+                    <IonTitle color="primary">ことばず！</IonTitle>
                 </IonToolbar>
                 <IonToolbar>
 
@@ -77,7 +75,7 @@ const About: React.FC = () => {
                         <li>右下の＋ボタンをタップ</li>
                         <li>略したい言葉を入力</li>
                         {/* TODO: ボタンを名前をもう少し考える */}
-                        <li>ボタンをタップ</li>
+                        <li>これでOKボタンをタップ</li>
                         <li>出来た略語を保存</li>
                     </ol>
                     <h5>略語を作成したら...</h5>

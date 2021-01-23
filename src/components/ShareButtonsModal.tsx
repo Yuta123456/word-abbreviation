@@ -38,7 +38,7 @@ const ShareButtonsModal: React.FC<ShareButtonsModalProp> = (props) => {
                 <TwitterShareButton
                     url={window.location.host}
                     title={props.ShareText}
-                    hashtags={["waApp"]} 
+                    hashtags={["ことばず！", "kotobazz"]} 
                     aria-label="Twitterでシェア">
                     <TwitterIcon round={true} size={40}/>
                 </TwitterShareButton><br/>
@@ -49,7 +49,7 @@ const ShareButtonsModal: React.FC<ShareButtonsModalProp> = (props) => {
                 // TODO:上手くいってないので修正
                 // TODO:タグを上手く修正
                     title={props.ShareText}
-                    url={window.location.host}
+                    url={window.location.host + '\n' + props.ShareText}
                     aria-label="LINEでシェア">
                     <LineIcon round={true} size={40}/>
                 </LineShareButton><br/>

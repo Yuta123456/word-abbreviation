@@ -51,14 +51,14 @@ const CreateWordModal: React.FC = () => {
     return (
         <IonPage>
             <IonHeader>
-                <IonToolbar>
-                    <IonTitle>略語を作成する</IonTitle>
-                    <IonButtons>
-                        <IonButton routerLink="/" routerDirection="back" aria-label="戻る">
-                            <IonIcon icon={chevronBackOutline}/>
+            <IonToolbar>
+                    <IonButtons slot="start" aria-label="戻る">
+                        <IonButton routerLink="/" routerDirection="back">
+                            <IonIcon icon={chevronBackOutline} />
                                 Back
                         </IonButton>
                     </IonButtons>
+                    <IonTitle color="primary">略語を作成する</IonTitle>
                 </IonToolbar>
             </IonHeader>
             {(result === "") ?
