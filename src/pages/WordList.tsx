@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  IonButton, IonButtons, IonCardSubtitle, IonContent,
+  IonButton, IonButtons, IonContent,
   IonHeader, IonIcon,
   IonItem,
   IonLabel,
@@ -24,11 +24,9 @@ const WordList: React.FC = () => {
   }, []);
 
   function deleteWord() {
-    console.log("delete word list", selectItem);
     const newWordList = Object.assign({}, wordList);
     delete newWordList[selectItem];
     setWordList(newWordList);
-    console.log("run delete word")
     localStorage.setItem("wordList", JSON.stringify(newWordList));
   }
   function createTweetText(word: string, result: string) {
@@ -41,8 +39,6 @@ const WordList: React.FC = () => {
           <IonTitle color="primary">
             ことばず！
           </IonTitle>
-          <IonCardSubtitle>
-          </IonCardSubtitle>
           <IonButtons slot="end" >
             <IonButton routerLink="./about" aria-label="ヘルプ">
                 <IonIcon icon={helpCircleOutline} size="large" />
